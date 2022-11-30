@@ -10,9 +10,9 @@ module.exports = {
       },
       colors: {
         lightBlue: '#00e6e6',
-        mainBlue: '#239bb6',
+        mainBlue: '#0099FF',
         darkBlue: '#074368',
-        mainBalck: '#303030',
+        mainBlack: '#303030',
         mainYellow: '#f2b202'
       }
     },
