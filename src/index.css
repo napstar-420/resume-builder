@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+@layer components {
+    .normal-btn {
+        @apply px-4 py-1 rounded text-xl font-roboto font-medium bg-mainBlue m-1 text-white border-2 border-mainBlue
+    }
+    .border-btn {
+        @apply px-4 py-1 rounded text-xl font-roboto font-medium text-mainBlue m-1 border-2 border-mainBlue
+    }
+}
