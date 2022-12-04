@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Summary() {
   return (
-    <section className='info_container'>
+    <section className='info_container grid-rows-1'>
       <article className='info_subContainer'>
         <nav className='container_nav'>
           <Link className='back_forward_link' to='/edit/skills'>
