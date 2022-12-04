@@ -54,7 +54,7 @@ export default function Home() {
         </div>
         <div className="flex flex-wrap items-center justify-center md:self-start">
             <Link to='templates' className="border-btn md:ml-0">Templates</Link>
-            <Link to='edit/personal-info' className="normal-btn md:mr-0">Get Started</Link>
+            <Link to='edit' className="normal-btn md:mr-0">Get Started</Link>
         </div>
         <span></span>
       </main>
