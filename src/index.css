@@ -72,6 +72,6 @@
         @apply px-2 py-1 border-2 border-green-500 rounded text-white font-medium bg-green-500;
     }
     .added_info_container {
-        @apply bg-gray-200 p-2 lg:w-48 xl:w-56 rounded lg:ml-10 grid grid-cols-[repeat(auto-fit,_minmax(200px,1fr))]
+        @apply bg-gray-200 p-2 lg:w-56 rounded lg:ml-10 grid grid-cols-[repeat(auto-fit,_minmax(200px,1fr))]
     }
 }

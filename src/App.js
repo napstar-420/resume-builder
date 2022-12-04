@@ -11,6 +11,7 @@ import Edit from './routes/edit';
 import EditRoot from './routes/editRoot';
 import WorkHistory from "./routes/work_history";
 import Education from "./routes/education";
+import Skills from "./routes/skills";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -21,6 +22,7 @@ function App() {
           <Route path="personal_info" element={<PersonalInfo />}/>
           <Route path="work_history" element={<WorkHistory />}/>
           <Route path="education" element={<Education />}/>
+          <Route path="skills" element={<Skills />}/>
         </Route>
       </Route>
     )
