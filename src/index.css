@@ -30,10 +30,10 @@
         @apply font-semibold sm:text-xl 2xl:text-2xl text-mainYellow mx-1 sm:col-start-1 sm:col-end-2 sm:row-start-1 sm:row-end-2
     }
     .info_container {
-        @apply flex-1 max-w-[1500px] mx-auto grid place-items-center p-4;
+        @apply flex-1 max-w-[1500px] h-max mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] grid-rows-[auto_auto] lg:grid-rows-1 gap-4 lg:justify-items-center p-4;
     }
     .info_subContainer {
-        @apply max-w-4xl;
+        @apply max-w-3xl self-center h-max;
     }
     .container_nav {
         @apply flex justify-between items-center;
@@ -42,7 +42,7 @@
         @apply text-2xl font-semibold text-darkBlue;
     }
     .back_forward_link {
-        @apply text-mainYellow text-2xl font-medium flex items-center hover:bg-gray-200 p-1 sm:pl-3 sm:pr-1 sm:py-1 rounded-full;
+        @apply text-mainYellow text-2xl font-medium flex items-center justify-center hover:bg-gray-200 py-1 px-2 rounded-full;
     }
     .back_forward_link > span {
         @apply hidden sm:block font-normal;
@@ -70,5 +70,8 @@
     }
     .submit-btn {
         @apply px-2 py-1 border-2 border-green-500 rounded text-white font-medium bg-green-500;
+    }
+    .added_info_container {
+        @apply bg-gray-200 p-2 lg:w-48 xl:w-56 rounded lg:ml-10 grid grid-cols-[repeat(auto-fit,_minmax(200px,1fr))]
     }
 }

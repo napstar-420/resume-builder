@@ -8,7 +8,7 @@ export default function PersonalInfo() {
       <article className='info_subContainer'>
         <nav className='container_nav'>
           <h1>Personal Information</h1>
-          <Link className='back_forward_link' to='/work'>
+          <Link className='back_forward_link' to='/edit/work_history'>
             <span>Next</span>
             <IoIosArrowForward />
           </Link>
