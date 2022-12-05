@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import Home from './routes/home';
 import PersonalInfo from './routes/personalInfo';
-import Edit from './routes/edit';
 import EditRoot from './routes/editRoot';
 import WorkHistory from "./routes/work_history";
 import Education from "./routes/education";
@@ -24,7 +23,7 @@ function App() {
         <Route index element={<Home />}/>
         <Route path="login" element={<Login />}/>
         <Route path="signup" element={<Signup />}/>
-        <Route path="edit/" element={<Edit />}>
+        <Route path="edit/">
           <Route index element={<EditRoot />}/>
           <Route path="personal_info" element={<PersonalInfo />}/>
           <Route path="work_history" element={<WorkHistory />}/>
