@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, Form, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { createUser } from "../signup";
+import { createUser, signUpWithGoogle } from "../signup";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -35,6 +35,14 @@ export default function Signup() {
       }
     }
   };
+
+  const handleGoogleSignUp = async() => {
+    const result = await signUpWithGoogle();
+    console.log(result);
+    if(result === 'logged-in') {
+      navigate('/edit');
+    }
+  }
 
   return (
     <div
@@ -129,7 +137,7 @@ export default function Signup() {
           <div className='mx-2'>or</div>
           <div className='flex-1 h-1 bg-gray-300 rounded'></div>
         </div>
-        <button className='px-16 py-2 border-2 border-gray-600 rounded text-lg font-semibold text-gray-600 flex items-center justify-center mb-4'>
+        <button onClick={handleGoogleSignUp} className='px-16 py-2 border-2 border-gray-600 rounded text-lg font-semibold text-gray-600 flex items-center justify-center mb-4'>
           Sign up with Google <FcGoogle className='ml-2 text-xl' />
         </button>
         <p className='text-xs text-gray-400 '>

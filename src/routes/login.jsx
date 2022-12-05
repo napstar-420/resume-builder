@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Form, Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { loginUser } from "../login";
+import { signUpWithGoogle } from "../signup";
 
 export default function Login() {
   const backgroundStyle = {
@@ -14,13 +15,18 @@ export default function Login() {
   const [loginError, setLoginError] = useState('')
   const handleSubmit = async (e) => {
     const result = await loginUser(email, password);
-    console.log(result)
     if(result === 'logged-in') {
       navigate('/edit');
     } else if (result === 'auth/wrong-password') {
       setLoginError('wrong-password');
     } else if (result === 'auth/user-not-found') {
       setLoginError('user-not-found')
+    }
+  }
+  const handleGoogleLogIn = async() => {
+    const result = await signUpWithGoogle();
+    if(result === 'logged-in') {
+      navigate('/edit');
     }
   }
   return (
@@ -83,7 +89,7 @@ export default function Login() {
           <div className='mx-2'>or</div>
           <div className='flex-1 h-1 bg-gray-300 rounded'></div>
         </div>
-        <button className='px-16 py-2 border-2 border-gray-600 rounded text-lg font-semibold text-gray-600 flex items-center justify-center mb-4'>
+        <button onClick={handleGoogleLogIn} className='px-16 py-2 border-2 border-gray-600 rounded text-lg font-semibold text-gray-600 flex items-center justify-center mb-4'>
           Login with Google <FcGoogle className='ml-2 text-xl' />
         </button>
         <p className='text-xs text-gray-400 '>
