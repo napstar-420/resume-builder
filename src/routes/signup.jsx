@@ -38,10 +38,10 @@ export default function Signup() {
 
   return (
     <div
-      className='w-screen min-h-screen grid place-items-center'
+      className='w-full flex-1 grid place-items-center'
       style={backgroundStyle}
     >
-      <div className='bg-white w-full h-full sm:w-max sm:h-max px-4 py-2 sm:py-8 sm:px-20 flex flex-col justify-center items-center sm:rounded sm:shadow-lg sm:shadow-gray-600 relative'>
+      <div className='bg-white w-full h-full sm:w-max sm:h-max sm:my-4 px-4 py-2 sm:py-8 sm:px-20 flex flex-col justify-center items-center sm:rounded sm:shadow-lg sm:shadow-gray-600 relative'>
         <h1 className='text-5xl font-semibold text-mainBlue'>Sign up</h1>
         <h3 className='text-base font-medium text-gray-500'>
           To Resume Builder
@@ -135,9 +135,6 @@ export default function Signup() {
         <p className='text-xs text-gray-400 '>
           Design and developed by Zohaib Khan
         </p>
-        <Link to='/' className='absolute top-3 left-3 text-sm text-mainYellow'>
-          Go Back
-        </Link>
       </div>
     </div>
   );

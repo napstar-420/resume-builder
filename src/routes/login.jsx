@@ -9,7 +9,7 @@ export default function Login() {
   };
   return (
     <div
-      className='w-screen min-h-screen grid place-items-center'
+      className='w-screen flex-1 grid place-items-center'
       style={backgroundStyle}
     >
       <div className='bg-white w-full h-full sm:w-max sm:h-max px-4 py-2 sm:py-8 sm:px-20 flex flex-col justify-center items-center sm:rounded sm:shadow-lg sm:shadow-gray-600 relative'>
@@ -57,9 +57,6 @@ export default function Login() {
         <p className='text-xs text-gray-400 '>
           Design and developed by Zohaib Khan
         </p>
-        <Link to='/' className='absolute top-3 left-3 text-sm text-mainYellow'>
-          Go Back
-        </Link>
       </div>
     </div>
   );

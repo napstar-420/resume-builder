@@ -16,10 +16,11 @@ import Summary from "./routes/summary";
 import Extras from "./routes/extras";
 import Login from "./routes/login";
 import Signup from "./routes/signup";
+import Root from "./routes/root";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" errorElement={<p>404 Page not found</p>}>
+      <Route path="/" element={<Root />} errorElement={<p>404 Page not found</p>}>
         <Route index element={<Home />}/>
         <Route path="login" element={<Login />}/>
         <Route path="signup" element={<Signup />}/>
