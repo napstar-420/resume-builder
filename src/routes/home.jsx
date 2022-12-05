@@ -1,11 +1,45 @@
-import React, { useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import heroImage from '../assets/hero_image.png';
+import heroImage from "../assets/hero_image.png";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 export default function Home() {
+  
   const [showNav, setShowNav] = useState(false);
+  const [authState, setAuthState] = useState({isSignedIn: false, user: null})
+  
+  const auth = getAuth();
+
+  function logOutUser() {
+    signOut(auth).then(() => {
+      setAuthState({
+        isSignedIn: false,
+        user: null
+      })
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setAuthState({...authState, isPending: true})
+      if (user) {
+        setAuthState({
+          isSignedIn: true,
+          user,
+        })
+      } else {
+        setAuthState({
+          isSignedIn: false,
+          user,
+        })
+      }
+    });
+  }, [auth, authState]);
+
   return (
     <section>
       <header className='bg-mainBlue flex justify-between items-center px-2 md:px-4 py-2 h-14'>
@@ -19,22 +53,7 @@ export default function Home() {
           <GiHamburgerMenu />
         </button>
         <MobileNav showNav={showNav} setShowNav={setShowNav} />
-        <nav className='hidden sm:block'>
-          <div className='flex text-center items-center'>
-            <Link
-              to='login'
-              className='border-btn border-transparent text-white text-lg py-0 hover:bg-white hover:bg-opacity-30'
-            >
-              Login
-            </Link>
-            <Link
-              to='signup'
-              className='normal-btn bg-white text-mainBlue border-white text-lg py-0 hover:bg-opacity-90 hover:border-opacity-70'
-            >
-              Sign up
-            </Link>
-          </div>
-        </nav>
+        <PcNav authState={authState} logOutUser={logOutUser}/>
       </header>
       <main style={{minHeight: 'calc(100vh - 3.5rem)', gridTemplateRows: '1fr auto auto auto 1fr'}} className='w-srceen px-2 md:px-4 py-1 flex flex-col justify-center items-center text-center md:text-left md:grid grid-cols-2 place-items-start'>
         <span></span>
@@ -54,12 +73,43 @@ export default function Home() {
         </div>
         <div className="flex flex-wrap items-center justify-center md:self-start">
             <Link to='templates' className="border-btn md:ml-0">Templates</Link>
-            <Link to='edit' className="normal-btn md:mr-0">Get Started</Link>
+            <Link to={authState.isSignedIn ? 'edit' : 'signup'} className="normal-btn md:mr-0">Get Started</Link>
         </div>
         <span></span>
       </main>
     </section>
   );
+}
+
+function PcNav({authState, logOutUser}) {
+  const {user} = authState;
+  if(user) {
+    return(
+      <div className="flex items-center">
+        <h3 className="font-semibold text-lg text-white mx-2">Welcome! {user.displayName}</h3>
+        <button className="bg-mainYellow text-white font-medium rounded px-2" onClick={logOutUser}>Log out</button>
+      </div>
+    )
+  } else {
+    return (
+      <nav className='hidden sm:block'>
+        <div className='flex text-center items-center'>
+          <Link
+            to='login'
+            className='border-btn border-transparent text-white text-lg py-0 hover:bg-white hover:bg-opacity-30'
+          >
+            Login
+          </Link>
+          <Link
+            to='signup'
+            className='normal-btn bg-white text-mainBlue border-white text-lg py-0 hover:bg-opacity-90 hover:border-opacity-70'
+          >
+            Sign up
+          </Link>
+        </div>
+      </nav>
+    );
+  }
 }
 
 function MobileNav({ showNav, setShowNav }) {
