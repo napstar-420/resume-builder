@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from './header'
 import Footer from './footer'
@@ -18,22 +18,20 @@ export default function Root() {
       console.log(error);
     })
   }
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setAuthState({...authState, isPending: true})
-      if (user) {
-        setAuthState({
-          isSignedIn: true,
-          user,
-        })
-      } else {
-        setAuthState({
-          isSignedIn: false,
-          user,
-        })
-      }
-    });
-  }, []);
+  onAuthStateChanged(auth, (user) => {
+    setAuthState({...authState, isPending: true})
+    if (user) {
+      setAuthState({
+        isSignedIn: true,
+        user,
+      })
+    } else {
+      setAuthState({
+        isSignedIn: false,
+        user,
+      })
+    }
+  });
   return (
     <div className='flex flex-col min-h-screen bg-gray-100'>
       <Header 
