@@ -63,7 +63,7 @@
         @apply text-mainBlue font-medium block;
     }
     .form_control {
-        @apply border-2 rounded px-2 py-1 w-full focus:outline-mainYellow;
+        @apply border-2 rounded px-2 py-1 w-full focus:outline-mainYellow disabled:bg-gray-200 disabled:text-gray-400;
     }
     .reset-btn {
         @apply px-2 py-1 border-2 border-red-500 rounded text-red-500 font-medium mt-4 sm:mt-0;
