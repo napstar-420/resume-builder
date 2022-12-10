@@ -6,7 +6,7 @@ import {
   RouterProvider
 } from "react-router-dom";
 import Home from './routes/home';
-import PersonalInfo from './routes/personalInfo';
+import PersonalInfo, {loader as personalInfoLoader, action as personalInfoAction} from './routes/personalInfo';
 import EditRoot from './routes/editRoot';
 import WorkHistory from "./routes/work_history";
 import Education from "./routes/education";
@@ -25,7 +25,7 @@ function App() {
         <Route path="signup" element={<Signup />}/>
         <Route path="edit/">
           <Route index element={<EditRoot />}/>
-          <Route path="personal_info" element={<PersonalInfo />}/>
+          <Route path="personal_info" element={<PersonalInfo />} loader={personalInfoLoader} action={personalInfoAction}/>
           <Route path="work_history" element={<WorkHistory />}/>
           <Route path="education" element={<Education />}/>
           <Route path="skills" element={<Skills />}/>
