@@ -1,8 +1,38 @@
+import { getAuth } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import React from "react";
+import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData, Form, redirect } from "react-router-dom";
+import { db } from "../firebaseConfig";
+
+export async function loader() {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const ref = doc(db, 'users', user.displayName + user.uid, 'data', 'personal_info');
+  const dataSnap = await getDoc(ref);
+  return dataSnap.data();
+}
+
+export async function action({request}) {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const ref = doc(db, 'users', user.displayName + user.uid, 'data', 'personal_info');
+  const formData = await request.formData();
+  const updates = Object.fromEntries(formData)
+  await setDoc(ref, updates);
+  return redirect(`/edit/work_history`);
+}
 
 export default function PersonalInfo() {
+  const data = useLoaderData();
+  const [fname, setFname] = useState(data.fname);
+  const [sname, setSname] = useState(data.sname);
+  const [email, setEmail] = useState(data.email);
+  const [mNumber, setMNumber] = useState(data.mNumber);
+  const [sNumber, setSNumber] = useState(data.sNumber);
+  const [address, setAddress] = useState(data.address);
+
   return (
     <section className='info_container grid-rows-1'>
       <article className='info_subContainer'>
@@ -17,7 +47,7 @@ export default function PersonalInfo() {
           <p className="description_para">
           At a minimum, your contact information section should include your name, phone number and email address. Depending on the type of job you’re applying for, you might also include a link to an online portfolio or professional website.
           </p>
-          <form className='edit_info_form'>
+          <Form method="post" className='edit_info_form'>
             <p>Required feilds are marked with <span className="astrk">*</span></p>
             <div>
               <label htmlFor='fname' className='formLabel'>
@@ -30,6 +60,8 @@ export default function PersonalInfo() {
                 name='fname'
                 required
                 placeholder='Ali'
+                value={fname}
+                onChange={(e) => setFname(e.target.value)}
               />
             </div>
             <div>
@@ -43,6 +75,8 @@ export default function PersonalInfo() {
                 name='sname'
                 required
                 placeholder='Khan'
+                value={sname}
+                onChange={(e) => setSname(e.target.value)}
               />
             </div>
             <div>
@@ -56,6 +90,8 @@ export default function PersonalInfo() {
                 name='email'
                 required
                 placeholder='khanali@service.pk'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -65,10 +101,12 @@ export default function PersonalInfo() {
               <input
                 type='number'
                 className='form_control'
-                id='m_number'
-                name='m_number'
+                id='mNumber'
+                name='mNumber'
                 required
                 placeholder='+923001234567'
+                value={mNumber}
+                onChange={(e) => setMNumber(e.target.value)}
               />
             </div>
             <div>
@@ -76,9 +114,11 @@ export default function PersonalInfo() {
               <input
                 type='number'
                 className='form_control'
-                id='s_number'
-                name='s_number'
+                id='sNumber'
+                name='sNumber'
                 placeholder='+923001234567'
+                value={sNumber}
+                onChange={(e) => setSNumber(e.target.value)}
               />
             </div>
             <div>
@@ -89,6 +129,8 @@ export default function PersonalInfo() {
                 id='address'
                 name='address'
                 placeholder='H #67, St #22, Liberty, Lahore, PK'
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
               />
             </div>
             <button type='submit' className='submit-btn'>
@@ -97,7 +139,7 @@ export default function PersonalInfo() {
             <button type='reset' className='reset-btn'>
               Reset
             </button>
-          </form>
+          </Form>
         </main>
       </article>
     </section>
