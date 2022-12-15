@@ -9,6 +9,9 @@ import { db } from "../firebaseConfig";
 export async function loader() {
   const auth = getAuth();
   const user = auth.currentUser;
+  if(!user) {
+    return redirect('/edit/');
+  }
   const ref = doc(db, 'users', user.displayName + user.uid, 'data', 'personal_info');
   const dataSnap = await getDoc(ref);
   return dataSnap.data();
