@@ -8,7 +8,9 @@ import {
 import Home from './routes/home';
 import PersonalInfo, {loader as personalInfoLoader, action as personalInfoAction} from './routes/personalInfo';
 import EditRoot from './routes/editRoot';
-import WorkHistory from "./routes/work_history";
+import WorkHistory, {loader as workLoader} from "./routes/work_history/workHistory";
+import WorkRoot from "./routes/work_history/workRoot.jsx";
+import WorkForm, {action as workAction} from "./routes/work_history/workForm";
 import Education from "./routes/education";
 import Skills from "./routes/skills";
 import Summary from "./routes/summary";
@@ -26,7 +28,10 @@ function App() {
         <Route path="edit/">
           <Route index element={<EditRoot />}/>
           <Route path="personal_info" element={<PersonalInfo />} loader={personalInfoLoader} action={personalInfoAction}/>
-          <Route path="work_history" element={<WorkHistory />}/>
+          <Route path="work_history/" element={<WorkHistory />} loader={workLoader}>
+            <Route index element={<WorkRoot />}/>
+            <Route path="/edit/work_history/:index" element={<WorkForm />} loader={workLoader} action={workAction}/>
+          </Route>
           <Route path="education" element={<Education />}/>
           <Route path="skills" element={<Skills />}/>
           <Route path="summary" element={<Summary />}/>
