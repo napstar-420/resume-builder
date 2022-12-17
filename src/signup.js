@@ -54,17 +54,7 @@ export async function createUserDoc(uid, name, email, password) {
     workHistory: {}
   })
   await setDoc(doc(db, 'users', name + uid, 'data', 'education'), {
-    education: [
-      {
-        schoolName: '',
-        schoolLocation: '',
-        degree: '',
-        fod: '',
-        startDate: '',
-        endDate: '',
-        eduExp: ''
-      }
-    ]
+    education: {}
   })
   await setDoc(doc(db, 'users', name + uid, 'data', 'skills'), {
     skills: [
