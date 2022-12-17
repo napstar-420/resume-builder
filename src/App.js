@@ -17,7 +17,7 @@ import EducationRoot from './routes/education/educationRoot';
 import Skills, {loader as skillLoader} from "./routes/skills/skill";
 import SkillForm, {action as skillAction} from "./routes/skills/skillForm";
 import SkillRoot from "./routes/skills/skillRoot";
-import Summary from "./routes/summary";
+import Summary, {loader as summaryLoader, action as summaryAction} from "./routes/summary";
 import Extras from "./routes/extras";
 import Login from "./routes/login";
 import Signup from "./routes/signup";
@@ -44,7 +44,7 @@ function App() {
             <Route index element={<SkillRoot />}/>
             <Route path=":index" element={<SkillForm />} loader={skillLoader} action={skillAction}/>
           </Route>
-          <Route path="summary" element={<Summary />}/>
+          <Route path="summary" element={<Summary />} loader={summaryLoader} action={summaryAction}/>
           <Route path="extras" element={<Extras />}/>
         </Route>
       </Route>
