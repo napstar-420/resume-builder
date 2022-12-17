@@ -105,7 +105,7 @@ export default function WorkIndex() {
             const workItem = workHistory[key]
             return (
               <Link
-                to={`/edit/work_history/${index}`}
+                to={`/edit/work_history/${key}`}
                 key={index}
                 className='bg-white p-2 rounded border-2 border-gray-200 m-1 bg-opacity-50 hover:border-mainBlue text-darkBlue hover:text-mainBlue cursor-pointer transition-all'
               >
