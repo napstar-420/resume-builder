@@ -25,16 +25,16 @@ export function signUpWithGoogle() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
   const result = signInWithPopup(auth, provider)
-  .then(() => {
-    return 'logged-in';
+  .then((userCredentials) => {
+    return {uid:userCredentials.user.uid, email: userCredentials.user.email, name: userCredentials.user.displayName} ;
   })
   .catch((error) => {
-    console.log(error);
+    return null;
   })
   return result;
 }
 
-export async function createUserDoc(uid, name, email, password) {
+export async function createUserDoc(uid, name, email, password = '') {
   await setDoc(doc(db, `users/${name + uid}`), {
     email,
     password,
@@ -50,29 +50,11 @@ export async function createUserDoc(uid, name, email, password) {
     address: ''
   })
 
-  await setDoc(doc(db, 'users', name + uid, 'data', 'work_history'), {
-    workHistory: {}
-  })
-  await setDoc(doc(db, 'users', name + uid, 'data', 'education'), {
-    education: {}
-  })
-  await setDoc(doc(db, 'users', name + uid, 'data', 'skills'), {
-    skills: [
-      {
-        skillName: '',
-        skillLevel: ''
-      }
-    ]
-  })
+  await setDoc(doc(db, 'users', name + uid, 'data', 'work_history'), {})
+  await setDoc(doc(db, 'users', name + uid, 'data', 'education'), {})
+  await setDoc(doc(db, 'users', name + uid, 'data', 'skills'), {})
   await setDoc(doc(db, 'users', name + uid, 'data', 'summary'), {
     summary: ''
   })
-  await setDoc(doc(db, 'users', name + uid, 'data', 'extras'), {
-    extras: [
-    {
-      extraHeading: '',
-      extraItems: ['']
-    }
-    ]
-  })
+  await setDoc(doc(db, 'users', name + uid, 'data', 'extras'), {})
 }

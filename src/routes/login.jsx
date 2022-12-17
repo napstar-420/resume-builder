@@ -25,7 +25,7 @@ export default function Login() {
   }
   const handleGoogleLogIn = async() => {
     const result = await signUpWithGoogle();
-    if(result === 'logged-in') {
+    if(result) {
       navigate('/edit');
     }
   }

@@ -30,7 +30,6 @@ export default function Signup() {
       if (result !== "email-already-in-use" && result !== "error") {
         await createUserDoc(result, name, email, password);
         setAccountCreated("account-created");
-        console.log("working");
         navigate("/edit");
       } else if (result === "email-already-in-use") {
         setAccountCreated(result);
@@ -42,8 +41,9 @@ export default function Signup() {
 
   const handleGoogleSignUp = async () => {
     const result = await signUpWithGoogle();
-    console.log(result);
-    if (result === "logged-in") {
+    if (result) {
+      setAccountCreated("in-process");
+      await createUserDoc(result.uid, result.name, result.email, '');
       navigate("/edit");
     }
   };
