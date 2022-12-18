@@ -18,7 +18,9 @@ import Skills, {loader as skillLoader} from "./routes/skills/skill";
 import SkillForm, {action as skillAction} from "./routes/skills/skillForm";
 import SkillRoot from "./routes/skills/skillRoot";
 import Summary, {loader as summaryLoader, action as summaryAction} from "./routes/summary";
-import Extras from "./routes/extras";
+import Extras, {loader as extraLoader} from "./routes/extras/extras";
+import ExtraForm, {action as extraAction} from "./routes/extras/extraForm";
+import ExtraRoot from "./routes/extras/extraRoot";
 import Login from "./routes/login";
 import Signup from "./routes/signup";
 import Root from "./routes/root";
@@ -45,7 +47,10 @@ function App() {
             <Route path=":index" element={<SkillForm />} loader={skillLoader} action={skillAction}/>
           </Route>
           <Route path="summary" element={<Summary />} loader={summaryLoader} action={summaryAction}/>
-          <Route path="extras" element={<Extras />}/>
+          <Route path="extras" element={<Extras />} loader={extraLoader}>
+            <Route index element={<ExtraRoot />}/>
+            <Route path=":index" element={<ExtraForm />} loader={extraLoader} action={extraAction}/>
+          </Route>
         </Route>
       </Route>
     )
