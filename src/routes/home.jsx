@@ -1,10 +1,50 @@
-import React from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import heroImage from "../assets/hero_image.png";
+import Header from "./header";
 
 export default function Home() {
-  const [authState] = useOutletContext();
+  const [showNav, setShowNav] = useState(false);
+  const [authState, setAuthState] = useState({isSignedIn: false, user: null});
+  const auth = getAuth();
+  function logOutUser() {
+    signOut(auth).then(() => {
+      setAuthState({
+        isSignedIn: false,
+        user: null
+      })
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthState({
+          isSignedIn: true,
+          user,
+        })
+      } else {
+        setAuthState({
+          isSignedIn: false,
+          user,
+        })
+      }
+    });
+  }, [])
+
+  console.log("HOME")
   return (
+    <>
+      <Header 
+        showNav={showNav} 
+        setShowNav={setShowNav} 
+        authState={authState} 
+        logOutUser={logOutUser}
+       />
       <main style={{minHeight: 'calc(100vh - 3.5rem)', gridTemplateRows: '1fr auto auto auto 1fr'}} className='w-srceen px-2 md:px-4 py-1 flex flex-col justify-center items-center text-center md:text-left md:grid grid-cols-2 place-items-start'>
         <span></span>
         <h1 className='text-4xl sm:text-5xl lg:text-7xl font-semibold text-darkBlue md:self-end'>
@@ -27,6 +67,7 @@ export default function Home() {
         </div>
         <span></span>
       </main>
+    </>
   );
 }
 

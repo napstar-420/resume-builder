@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Header({showNav, setShowNav, authState, logOutUser}) {
   return (
     <header className='bg-mainBlue flex justify-between items-center px-2 md:px-4 py-2 h-14'>
-      <Link to='/' className='font-semibold text-2xl text-white'>Resume Builder</Link>
+      <h2 className='font-semibold text-2xl text-white'>Resume Builder</h2>
       <button
         className='border-2 border-white rounded p-1 text-white sm:hidden'
         onClick={() => setShowNav(!showNav)}
