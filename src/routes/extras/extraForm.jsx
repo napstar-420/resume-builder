@@ -61,6 +61,12 @@ export default function ExtraForm() {
     navigate("/edit/extras");
   }
 
+  function handleOnChange(e, index) {
+    const updatedItems = [...items];
+    updatedItems[index] = e.target.value;
+    setItems(updatedItems);
+  }
+
   useEffect(() => {
     setExtras(dataSnap[index]);
     setHeading(extras.heading);
@@ -96,7 +102,8 @@ export default function ExtraForm() {
                 id='extra_item'
                 name={`item${index}`}
                 className='form_control'
-                defaultValue={item}
+                value={item}
+                onChange={(e) => handleOnChange(e, index)}
               />
             </div>
           );
