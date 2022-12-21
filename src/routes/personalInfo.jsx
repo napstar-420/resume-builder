@@ -1,10 +1,11 @@
-import { getAuth } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
 import React from "react";
 import { useState } from "react";
-import { IoIosArrowForward } from "react-icons/io";
-import { Link, useLoaderData, Form, redirect } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import { Link, useLoaderData, Form, redirect, useNavigation } from "react-router-dom";
+import {RxDoubleArrowRight} from 'react-icons/rx';
+import {MdDelete} from 'react-icons/md';
 
 export async function loader() {
   const auth = getAuth();
@@ -29,6 +30,7 @@ export async function action({request}) {
 
 export default function PersonalInfo() {
   const data = useLoaderData();
+  const navigation = useNavigation();
   const [fname, setFname] = useState(data.fname);
   const [sname, setSname] = useState(data.sname);
   const [email, setEmail] = useState(data.email);
@@ -43,7 +45,7 @@ export default function PersonalInfo() {
           <h1>Personal Information</h1>
           <Link className='back_forward_link' to='/edit/work_history'>
             <span>Next</span>
-            <IoIosArrowForward />
+            <RxDoubleArrowRight />
           </Link>
         </nav>
         <main>
@@ -136,15 +138,32 @@ export default function PersonalInfo() {
                 onChange={(e) => setAddress(e.target.value)}
               />
             </div>
-            <button type='submit' className='submit-btn'>
+            <button type='submit' className='submit-btn sm:col-start-1 sm:col-end-3'>
               Save and continue
             </button>
-            <button type='reset' className='reset-btn'>
-              Reset
-            </button>
+            {
+              navigation.state === 'submitting' ? (
+                <div className="absolute w-full h-full grid place-items-center">
+                  <div className="arc self-end"></div>
+                  <span className=" font-black text-darkBlue text-xl text-center self-start">
+                    SAVING
+                  </span>
+                </div>
+              ) : ''
+            }
           </Form>
         </main>
       </article>
+      <div className={navigation.state === 'loading' ? 'animation-wrapper' : 'hidden'}>
+        <div class='cube'>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
     </section>
   );
 }

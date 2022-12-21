@@ -1,7 +1,7 @@
 import { getAuth } from "firebase/auth";
 import React from "react";
+import { HiOutlineClipboardDocumentCheck } from "react-icons/hi2";
 import { Link, Outlet, redirect, useLoaderData } from "react-router-dom";
-import headerIcon from "../assets/header-icon.webp";
 
 export async function loader() {
   const auth = getAuth();
@@ -16,15 +16,15 @@ export async function loader() {
 export default function Edit() {
   const displayName = useLoaderData();
   return (
-    <div className='flex-1'>
-      <header className='bg-white p-2 shadow-sm relative'>
+    <div className='flex-1 flex flex-col bg-gray-100'>
+      <header className=' py-2 md:py-3 px-4 shadow-lg flex justify-between bg-white'>
         <Link to='/' className='flex items-center'>
-          <img src={headerIcon} alt='' width='30px' className='mr-2' />
-          <h2 className='text-xl font-semibold text-darkBlue'>
+          <HiOutlineClipboardDocumentCheck className='mr-2 text-2xl text-blue-500' />
+          <h2 className='text-2xl font-medium text-[#505050]'>
             Resume Builder
           </h2>
         </Link>
-        <h3 className='hidden xs:block absolute right-2 top-2 text-lg font-medium text-mainYellow'>
+        <h3 className='hidden xs:block text-xl font-medium font-poppins text-mainYellow'>
           <span className='text-gray-500'>Welcome!</span> {displayName}
         </h3>
       </header>

@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { getAuth } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { RxDoubleArrowLeft, RxDoubleArrowRight } from "react-icons/rx";
 import { HiPlusCircle } from "react-icons/hi";
 import {
   Link,
+  NavLink,
   Outlet,
   redirect,
   useLoaderData,
   useNavigate,
+  useNavigation,
 } from "react-router-dom";
 import { db } from "../../firebaseConfig";
+import EmptyDoc from "../../components/emptyDoc";
+import {MdDelete} from 'react-icons/md';
 
 export async function loader({ params }) {
   const auth = getAuth();
@@ -31,6 +35,7 @@ export async function loader({ params }) {
 
 export default function WorkIndex() {
   const navigate = useNavigate();
+  const navigation = useNavigation()
   const { dataSnap } = useLoaderData();
   const [workHistory, setWorkHistory] = useState(dataSnap);
 
@@ -80,13 +85,13 @@ export default function WorkIndex() {
       <article className='info_subContainer'>
         <nav className='container_nav'>
           <Link className='back_forward_link' to='/edit/personal_info'>
-            <IoIosArrowBack />
+            <RxDoubleArrowLeft />
             <span>Back</span>
           </Link>
           <h1>Work History</h1>
           <Link className='back_forward_link' to='/edit/education'>
             <span>Next</span>
-            <IoIosArrowForward />
+            <RxDoubleArrowRight />
           </Link>
         </nav>
         <main className=''>
@@ -96,7 +101,7 @@ export default function WorkIndex() {
             former employers. Here, you should list all of your most relevant
             work experiences, beginning with your most recent job.
           </p>
-          <Outlet context={[updateWorkHistory]}/>
+          <Outlet context={[updateWorkHistory]} />
         </main>
       </article>
       <div className='added_info_container'>
@@ -104,26 +109,36 @@ export default function WorkIndex() {
           Object.keys(workHistory).map((key, index) => {
             const workItem = workHistory[key]
             return (
-              <Link
+              <NavLink
                 to={`/edit/work_history/${key}`}
                 key={index}
-                className='bg-white p-2 rounded border-2 border-gray-200 m-1 bg-opacity-50 hover:border-mainBlue text-darkBlue hover:text-mainBlue cursor-pointer transition-all'
+                className={({isActive, isPending}) => 
+                isActive ? 'active_link' : isPending ? 'pending_link' : 'nav_link'
+              }
               >
                 <h3 className='font-semibold'>{workItem.jobTitle || "Empty"}</h3>
                 <h4 className='text-sm italic'>
                   - {workItem.employer || "Empty"}
                 </h4>
-              </Link>
+              </NavLink>
             );
           })
         ) : (
-          <p className='text-center text-xl font-semibold text-gray-600 place-self-center'>
-            No work added
-          </p>
+          <EmptyDoc name={'work'}/>
         )}
-        <button className='add_new_btn' onClick={handleCreateNewWork}>
+        <button className='add_new_btn self-start' onClick={handleCreateNewWork}>
           Add new Work <HiPlusCircle className='plus-icon' />
         </button>
+      </div>
+      <div className={navigation.state === 'loading' ? 'animation-wrapper' : 'hidden'}>
+        <div class='cube'>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </section>
   );

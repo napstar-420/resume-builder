@@ -1,8 +1,8 @@
 import { getAuth } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { Form, Link, redirect, useLoaderData } from "react-router-dom";
+import { RxDoubleArrowLeft, RxDoubleArrowRight } from "react-icons/rx";
+import { Form, Link, redirect, useLoaderData, useNavigation } from "react-router-dom";
 import { db } from "../firebaseConfig";
 
 export async function loader() {
@@ -29,18 +29,20 @@ export async function action({request}) {
 export default function Summary() {
   const dataSnap = useLoaderData();
   const [summary, setSummary] = useState(dataSnap.summary);
+  const navigation = useNavigation();
+  
   return (
     <section className='info_container grid-rows-1'>
       <article className='info_subContainer'>
         <nav className='container_nav'>
           <Link className='back_forward_link' to='/edit/skills'>
-            <IoIosArrowBack />
+            <RxDoubleArrowLeft />
             <span>Back</span>
           </Link>
           <h1>Summary</h1>
           <Link className='back_forward_link' to='/edit/extras'>
             <span>Next</span>
-            <IoIosArrowForward />
+            <RxDoubleArrowRight />
           </Link>
         </nav>
         <main>
@@ -67,9 +69,29 @@ export default function Summary() {
             </div>
             <button type="onClick" onClick={() => setSummary('')} className="reset-btn">Reset</button>
             <button type="submit" className="submit-btn">Save and Continue</button>
+            {
+              navigation.state === 'submitting' ? (
+                <div className="absolute w-full h-full grid place-items-center">
+                  <div className="arc self-end"></div>
+                  <span className=" font-black text-darkBlue text-xl text-center self-start">
+                    SAVING
+                  </span>
+                </div>
+              ) : ''
+            }
           </Form>
         </main>
       </article>
+      <div className={navigation.state === 'loading' ? 'animation-wrapper' : 'hidden'}>
+        <div class='cube'>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
     </section>
   );
 }

@@ -3,6 +3,7 @@ import { Form, Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { loginUser } from "../login";
 import { signUpWithGoogle } from "../signup";
+import {IoMdArrowBack} from 'react-icons/io'
 
 export default function Login() {
   const backgroundStyle = {
@@ -52,6 +53,7 @@ export default function Login() {
             name='email'
             className='form_control mb-2'
             value={email}
+            required
             onChange={(e) => {
               setEmail(e.target.value);
               setLoginError('');
@@ -69,6 +71,7 @@ export default function Login() {
             name='password'
             className='form_control mb-2'
             value={password}
+            required
             onChange={(e) => {
               setPassword(e.target.value)
               setLoginError('');
@@ -89,9 +92,12 @@ export default function Login() {
           <div className='mx-2'>or</div>
           <div className='flex-1 h-1 bg-gray-300 rounded'></div>
         </div>
-        <button onClick={handleGoogleLogIn} className='px-16 py-2 border-2 border-gray-600 rounded text-lg font-semibold text-gray-600 flex items-center justify-center mb-4'>
+        <button onClick={handleGoogleLogIn} className='px-16 py-2 border-2 border-gray-600 hover:bg-gray-600 rounded text-lg font-semibold text-gray-600 hover:text-white flex items-center justify-center mb-4 transition-all'>
           Login with Google <FcGoogle className='ml-2 text-xl' />
         </button>
+        <Link to='/' className="absolute left-0 top-0 m-4 border-2 border-mainYellow text-mainYellow hover:bg-mainYellow hover:text-white rounded-full p-1 text-xl transition-all">
+          <IoMdArrowBack />
+        </Link>
         <p className='text-xs text-gray-400 '>
           Design and developed by Zohaib Khan
         </p>

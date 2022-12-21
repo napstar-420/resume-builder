@@ -7,6 +7,7 @@ import {
   redirect,
   useLoaderData,
   useNavigate,
+  useNavigation,
   useOutletContext,
 } from "react-router-dom";
 import { db } from "../../firebaseConfig";
@@ -34,6 +35,7 @@ export default function EducationForm() {
   const { dataSnap, index } = useLoaderData();
   const [updateEducation] = useOutletContext();
   const navigate = useNavigate();
+  const navigation = useNavigation();
 
   const [data, setData] = useState(dataSnap[index]);
   const [schoolName, setSchoolName] = useState(data.schoolName);
@@ -91,10 +93,12 @@ export default function EducationForm() {
 
   return (
     <Form method='post' className='edit_info_form' onSubmit={handleSave}>
-      <p>Required feilds are marked with <span className="astrk">*</span></p>
+      <p>
+        Required feilds are marked with <span className='astrk'>*</span>
+      </p>
       <div>
         <label htmlFor='schoolName' className='formLabel'>
-          School name <span className="astrk">*</span>
+          School name <span className='astrk'>*</span>
         </label>
         <input
           type='text'
@@ -108,7 +112,7 @@ export default function EducationForm() {
       </div>
       <div>
         <label htmlFor='schoolLocation' className='formLabel'>
-          School Location <span className="astrk">*</span>
+          School Location <span className='astrk'>*</span>
         </label>
         <input
           type='text'
@@ -122,7 +126,7 @@ export default function EducationForm() {
       </div>
       <div>
         <label htmlFor='degree' className='formLabel'>
-          Degree <span className="astrk">*</span>
+          Degree <span className='astrk'>*</span>
         </label>
         <input
           type='text'
@@ -136,7 +140,7 @@ export default function EducationForm() {
       </div>
       <div>
         <label htmlFor='fieldOfStudy' className='formLabel'>
-          Field of Study <span className="astrk">*</span>
+          Field of Study <span className='astrk'>*</span>
         </label>
         <input
           type='text'
@@ -150,7 +154,7 @@ export default function EducationForm() {
       </div>
       <div>
         <label htmlFor='startDate' className='formLabel'>
-          Graduation Start Date <span className="astrk">*</span>
+          Graduation Start Date <span className='astrk'>*</span>
         </label>
         <input
           type='month'
@@ -165,7 +169,7 @@ export default function EducationForm() {
         <>
           <div>
             <label htmlFor='endDate' className='formLabel'>
-              Graduation End Date <span className="astrk">*</span>
+              Graduation End Date <span className='astrk'>*</span>
             </label>
             <input
               type='month'
@@ -251,13 +255,23 @@ export default function EducationForm() {
           value={eduExp}
           onChange={(e) => setEduExp(e.target.value)}
         ></textarea>
-        </div>
+      </div>
       <button type='button' className='reset-btn' onClick={handleDelete}>
         Delete
       </button>
       <button type='submit' className='submit-btn'>
         Save
       </button>
+      {navigation.state === "submitting" ? (
+        <div className='absolute w-full h-full grid place-items-center'>
+          <div className='arc self-end'></div>
+          <span className=' font-black text-darkBlue text-xl text-center self-start'>
+            SAVING
+          </span>
+        </div>
+      ) : (
+        ""
+      )}
     </Form>
   );
 }

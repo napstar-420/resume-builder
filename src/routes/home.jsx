@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/hero_image.png";
-import Header from "./header";
+import Header from "../components/header";
 
 export default function Home() {
   const [showNav, setShowNav] = useState(false);
@@ -36,7 +36,6 @@ export default function Home() {
     });
   }, [])
 
-  console.log("HOME")
   return (
     <>
       <Header 
@@ -45,25 +44,21 @@ export default function Home() {
         authState={authState} 
         logOutUser={logOutUser}
        />
-      <main style={{minHeight: 'calc(100vh - 3.5rem)', gridTemplateRows: '1fr auto auto auto 1fr'}} className='w-srceen px-2 md:px-4 py-1 flex flex-col justify-center items-center text-center md:text-left md:grid grid-cols-2 place-items-start'>
+      <main style={{minHeight: 'calc(100vh - 4rem)', gridTemplateRows: '1fr auto auto auto 1fr'}} className='px-2 md:px-4 lg:px-8 py-1 flex flex-col justify-center items-center text-center md:text-left md:grid grid-cols-2 place-items-start'>
         <span></span>
-        <h1 className='text-4xl sm:text-5xl lg:text-7xl font-semibold text-darkBlue md:self-end'>
+        <h1 className='text-4xl sm:text-5xl xl:text-7xl font-semibold font-poppins text-mainBlue md:self-end'>
             Free Online<br />
             Resume Builder
         </h1>
-        <ul className='flex items-center text-mainYellow gap-1 my-1 md:mb-8'>
-            <li className='sm:text-xl md:font-medium'>Free</li>
-            <span className='sm:text-xl md:font-medium'>-</span>
-            <li className='sm:text-xl md:font-medium'>Fast</li>
-            <span className='sm:text-xl md:font-medium'>-</span>
-            <li className='sm:text-xl md:font-medium'>Premium</li>
+        <ul className='my-1 md:mb-8 md:mt-2'>
+            <li className="text-[#404040] text-xs sm:text-sm xl:text-base">Create your resume easily with our<br /> free builder and professional templates.</li>
         </ul>
-        <div className="hero_image_wrapper w-[250px] sm:w-[300px] lg:w-[400px] my-4 col-start-2 col-end-3 row-start-1 row-end-6 justify-self-center">
+        <div className="hero_image_wrapper w-[250px] sm:w-[300px] xl:w-[400px] my-4 col-start-2 col-end-3 row-start-1 row-end-6 justify-self-center">
             <img src={heroImage} alt='resume vector art' className="w-full"/>
         </div>
         <div className="flex flex-wrap items-center justify-center md:self-start">
-            <Link to='templates' className="border-btn md:ml-0">Templates</Link>
-            <Link to={authState.isSignedIn ? 'edit' : 'signup'} className="normal-btn md:mr-0">Get Started</Link>
+            <Link to='templates' className="border-btn md:ml-0 font-poppins  text-mainYellow border-mainYellow hover:bg-yellow-100">Templates</Link>
+            <Link to={authState.isSignedIn ? 'edit' : 'signup'} className="normal-btn font-poppins md:mr-0 bg-mainYellow border-mainYellow hover:bg-yellow-600 hover:border-mainYellow">Get Started</Link>
         </div>
         <span></span>
       </main>

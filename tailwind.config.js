@@ -7,6 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
+        railway: ['Raleway', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif']
       },
       colors: {
         lightBlue: '#00e6e6',

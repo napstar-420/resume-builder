@@ -7,6 +7,7 @@ import {
   redirect,
   useLoaderData,
   useNavigate,
+  useNavigation,
   useOutletContext,
 } from "react-router-dom";
 import { db } from "../../firebaseConfig";
@@ -34,6 +35,7 @@ export default function WorkForm() {
   const { dataSnap, index } = useLoaderData();
   const [updateWorkHistory] = useOutletContext();
   const navigate = useNavigate();
+  const navigation = useNavigation();
 
   const [data, setData] = useState(dataSnap[index]);
   const [jobTitle, setJobTitle] = useState(data.jobTitle);
@@ -266,6 +268,16 @@ export default function WorkForm() {
       <button type='submit' className='submit-btn'>
         Save
       </button>
+      {navigation.state === "submitting" ? (
+        <div className='absolute w-full h-full grid place-items-center'>
+          <div className='arc self-end'></div>
+          <span className=' font-black text-darkBlue text-xl text-center self-start'>
+            SAVING
+          </span>
+        </div>
+      ) : (
+        ""
+      )}
     </Form>
   );
 }

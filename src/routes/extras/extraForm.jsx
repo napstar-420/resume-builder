@@ -7,6 +7,7 @@ import {
   redirect,
   useLoaderData,
   useNavigate,
+  useNavigation,
   useOutletContext,
 } from "react-router-dom";
 import { db } from "../../firebaseConfig";
@@ -37,6 +38,7 @@ export default function ExtraForm() {
   const { dataSnap, index } = useLoaderData();
   const [updateExtras] = useOutletContext();
   const navigate = useNavigate();
+  const navigation = useNavigation();
 
   const [extras, setExtras] = useState(dataSnap[index]);
   const [heading, setHeading] = useState(extras.heading);
@@ -113,6 +115,16 @@ export default function ExtraForm() {
       <button type='submit' className='submit-btn'>
         Save
       </button>
+      {navigation.state === "submitting" ? (
+        <div className='absolute w-full h-full grid place-items-center'>
+          <div className='arc self-end'></div>
+          <span className=' font-black text-darkBlue text-xl text-center self-start'>
+            SAVING
+          </span>
+        </div>
+      ) : (
+        ""
+      )}
     </Form>
   );
 }

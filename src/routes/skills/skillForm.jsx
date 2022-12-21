@@ -7,6 +7,7 @@ import {
   redirect,
   useLoaderData,
   useNavigate,
+  useNavigation,
   useOutletContext,
 } from "react-router-dom";
 import { db } from "../../firebaseConfig";
@@ -30,6 +31,7 @@ export default function SkillForm() {
   const { dataSnap, index } = useLoaderData();
   const [updateSkills] = useOutletContext();
   const navigate = useNavigate();
+  const navigation = useNavigation();
 
   const [data, setData] = useState(dataSnap[index]);
   const [name, setName] = useState(data.name);
@@ -103,6 +105,16 @@ export default function SkillForm() {
       <button type='submit' className='submit-btn'>
         Save
       </button>
+      {navigation.state === "submitting" ? (
+        <div className='absolute w-full h-full grid place-items-center'>
+          <div className='arc self-end'></div>
+          <span className=' font-black text-darkBlue text-xl text-center self-start'>
+            SAVING
+          </span>
+        </div>
+      ) : (
+        ""
+      )}
     </Form>
   );
 }

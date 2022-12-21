@@ -2,14 +2,17 @@ import { getAuth } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { HiPlusCircle } from "react-icons/hi";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { RxDoubleArrowLeft, RxDoubleArrowRight } from "react-icons/rx";
 import {
   Link,
+  NavLink,
   Outlet,
   redirect,
   useLoaderData,
   useNavigate,
+  useNavigation,
 } from "react-router-dom";
+import EmptyDoc from "../../components/emptyDoc";
 import { db } from "../../firebaseConfig";
 
 export async function loader({ params }) {
@@ -33,6 +36,7 @@ export default function Education() {
   const { dataSnap } = useLoaderData();
   const [education, setEducation] = useState(dataSnap);
   const navigate = useNavigate();
+  const navigation = useNavigation();
 
   async function updateEducation() {
     const auth = getAuth();
@@ -44,7 +48,8 @@ export default function Education() {
       "data",
       "education"
     );
-    setEducation((await getDoc(ref)).data());
+    const dataSnap = (await getDoc(ref)).data();
+    setEducation(dataSnap);
   }
 
   async function createNewEducation() {
@@ -78,13 +83,13 @@ export default function Education() {
       <article className='info_subContainer'>
         <nav className='container_nav'>
           <Link className='back_forward_link' to='/edit/work_history'>
-            <IoIosArrowBack />
+            <RxDoubleArrowLeft />
             <span>Back</span>
           </Link>
           <h1>Education</h1>
           <Link className='back_forward_link' to='/edit/skills'>
             <span>Next</span>
-            <IoIosArrowForward />
+            <RxDoubleArrowRight />
           </Link>
         </nav>
         <main>
@@ -101,27 +106,38 @@ export default function Education() {
         {Object.keys(education).length > 0 ? (
           Object.keys(education).map((key, index) => {
             const eduItem = education[key];
+            console.log(eduItem)
             return (
-              <Link
+              <NavLink
                 to={`/edit/education/${key}`}
                 key={index}
-                className='bg-white p-2 rounded border-2 border-gray-200 m-1 bg-opacity-50 hover:border-mainBlue text-darkBlue hover:text-mainBlue cursor-pointer transition-all'
+                className={({isActive, isPending}) => 
+                isActive ? 'active_link' : isPending ? 'pending_link' : 'nav_link'
+              }
               >
                 <h3 className='font-semibold'>{eduItem.degree || "Empty"}</h3>
                 <h4 className='text-sm italic'>
                   - {eduItem.schoolName || "Empty"}
                 </h4>
-              </Link>
+              </NavLink>
             );
           })
         ) : (
-          <p className='text-center text-xl font-semibold text-gray-600 place-self-center'>
-            No education added
-          </p>
+          <EmptyDoc name={'education'}/>
         )}
-        <button className='add_new_btn' onClick={createNewEducation}>
+        <button className='add_new_btn self-start m-1' onClick={createNewEducation}>
           Add new Education <HiPlusCircle className='plus-icon' />
         </button>
+      </div>
+      <div className={navigation.state === 'loading' ? 'animation-wrapper' : 'hidden'}>
+        <div class='cube'>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </section>
   );

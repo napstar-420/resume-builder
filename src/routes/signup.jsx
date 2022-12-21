@@ -3,6 +3,7 @@ import { Link, Form, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import {AiOutlineLoading3Quarters} from 'react-icons/ai';
 import { createUser, signUpWithGoogle, createUserDoc } from "../signup";
+import {IoMdArrowBack} from 'react-icons/io'
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ export default function Signup() {
       style={backgroundStyle}
     >
       <div className='bg-white h-full sm:w-max sm:h-max sm:my-4 px-4 py-2 sm:px-20 sm:py-8 flex flex-col sm:rounded sm:shadow-lg sm:shadow-gray-600 relative'>
-        <h1 className='text-5xl font-semibold text-mainBlue text-center'>Sign up</h1>
+        <h1 className='text-5xl font-semibold text-mainBlue text-center mt-4 xs:mt-0'>Sign up</h1>
         <h3 className='text-base font-medium text-gray-500 text-center'>
           To Resume Builder
         </h3>
@@ -232,10 +233,13 @@ export default function Signup() {
         </div>
         <button
           onClick={handleGoogleSignUp}
-          className='px-16 py-2 border-2 border-gray-600 rounded text-lg font-semibold text-gray-600 flex items-center justify-center mb-4'
+          className='px-16 py-2 border-2 border-gray-600 hover:bg-gray-600 rounded text-lg font-semibold text-gray-600 hover:text-white transition-all flex items-center justify-center mb-4'
         >
           Sign up with Google <FcGoogle className='ml-2 text-xl' />
         </button>
+        <Link to='/' className="absolute left-0 top-0 m-4 border-2 border-mainYellow text-mainYellow hover:bg-mainYellow hover:text-white rounded-full p-1 text-xl transition-all">
+          <IoMdArrowBack />
+        </Link>
         <p className='text-xs text-gray-400 '>
           Design and developed by Zohaib Khan
         </p>
