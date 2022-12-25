@@ -25,6 +25,30 @@ import ExtraRoot from "./routes/extras/extraRoot";
 import Login from "./routes/login";
 import Signup from "./routes/signup";
 import Root from "./routes/root";
+import Templates, {loader as templateLoader} from './routes/templates/templates.jsx';
+import TemplatesRoot from './routes/templates/templatesRoot.jsx';
+import Classic, {ClassicPrint} from "./routes/templates/classic";
+
+export function formatDate(str) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const monthIndex = str.slice(-2);
+  const year = str.slice(0, 4);
+  return `${months[monthIndex - 1]} ${year}`;
+}
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -51,6 +75,13 @@ function App() {
           <Route path="extras" element={<Extras />} loader={extraLoader}>
             <Route index element={<ExtraRoot />}/>
             <Route path=":index" element={<ExtraForm />} loader={extraLoader} action={extraAction}/>
+          </Route>
+        </Route>
+        <Route path="templates" element={<Templates />} loader={templateLoader}>
+          <Route index element={<TemplatesRoot />}/>
+          <Route path="classic" element={<Classic />}/>
+          <Route path="download">
+            <Route path="classic" element={<ClassicPrint />} />
           </Route>
         </Route>
       </Route>

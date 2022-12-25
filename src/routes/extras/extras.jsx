@@ -74,7 +74,7 @@ export default function Extras() {
             <span>Back</span>
           </Link>
           <h1>Extras</h1>
-          <Link className='back_forward_link' to='/edit/templates'>
+          <Link className='back_forward_link' to='/templates'>
             <span>Next</span>
             <RxDoubleArrowRight />
           </Link>

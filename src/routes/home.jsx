@@ -1,13 +1,14 @@
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigation } from "react-router-dom";
 import heroImage from "../assets/hero_image.png";
 import Header from "../components/header";
 
 export default function Home() {
   const [showNav, setShowNav] = useState(false);
   const [authState, setAuthState] = useState({isSignedIn: false, user: null});
+  const navigation = useNavigation();
   const auth = getAuth();
   function logOutUser() {
     signOut(auth).then(() => {
@@ -62,6 +63,16 @@ export default function Home() {
         </div>
         <span></span>
       </main>
+      <div className={navigation.state === 'loading' ? 'animation-wrapper' : 'hidden'}>
+        <div className='cube'>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
     </>
   );
 }
