@@ -7,11 +7,6 @@ import {IoMdArrowBack} from 'react-icons/io'
 
 export default function Signup() {
   const navigate = useNavigate();
-  // Background Style
-  const backgroundStyle = {
-    backgroundColor: "#0099ff",
-    backgroundImage: `url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23074368' fill-opacity='0.4'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-  };
   // useStates Hooks
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -52,9 +47,8 @@ export default function Signup() {
   return (
     <div
       className='flex-1 grid place-items-center'
-      style={backgroundStyle}
     >
-      <div className='bg-white h-full sm:w-max sm:h-max sm:my-4 px-4 py-2 sm:px-20 sm:py-8 flex flex-col sm:rounded sm:shadow-lg sm:shadow-gray-600 relative'>
+      <div className='bg-white h-full sm:w-max sm:h-max sm:my-4 px-4 py-2 sm:px-20 sm:py-8 flex flex-col sm:rounded sm:shadow sm:shadow-gray-400 relative'>
         <h1 className='text-5xl font-semibold text-mainBlue text-center mt-4 xs:mt-0'>Sign up</h1>
         <h3 className='text-base font-medium text-gray-500 text-center'>
           To Resume Builder

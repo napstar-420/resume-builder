@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Home from './routes/home';
 import PersonalInfo, {loader as personalInfoLoader, action as personalInfoAction} from './routes/personalInfo';
-import Edit, {loader as editLoader} from "./routes/edit";
+import Edit from "./routes/edit";
 import EditRoot from './routes/editRoot';
 import WorkHistory, {loader as workLoader} from "./routes/work_history/workHistory";
 import WorkRoot from "./routes/work_history/workRoot.jsx";
@@ -57,7 +57,7 @@ function App() {
         <Route index element={<Home />}/>
         <Route path="login" element={<Login />}/>
         <Route path="signup" element={<Signup />}/>
-        <Route path="edit/" element={<Edit />} loader={editLoader}>
+        <Route path="edit/" element={<Edit />}>
           <Route index element={<EditRoot />}/>
           <Route path="personal_info" element={<PersonalInfo />} loader={personalInfoLoader} action={personalInfoAction}/>
           <Route path="work_history/" element={<WorkHistory />} loader={workLoader}>

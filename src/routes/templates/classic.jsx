@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { formatDate } from "../../App";
 import jsPDF from "jspdf";
 import { useRef } from "react";
@@ -8,12 +8,13 @@ import {BsPencilFill, BsDownload} from 'react-icons/bs'
 
 export default function Classic() {
   const pdfRef = useRef(null)
+  const navigate = useNavigate()
   const userDoc = useOutletContext();
   const { personalInfo, workHistory, education, skills, summary, extras } =
     userDoc;
 
   function handleDownload() {
-    window.open('/templates/download/classic');
+    navigate('/templates/download/classic')
   }
 
   return (
@@ -126,6 +127,7 @@ export default function Classic() {
 
 export function ClassicPrint() {
   const userDoc = useOutletContext();
+  const navigate = useNavigate();
   const pdfRef = useRef(null);
   const { personalInfo, workHistory, education, skills, summary, extras } =
     userDoc;
@@ -141,13 +143,12 @@ export function ClassicPrint() {
         doc.save('resume.pdf');
       }
     })
-    setTimeout(() => {
-      window.close()
-    }, 3000)
   }
 
   useEffect(() => {
     download();
+    navigate('/templates/classic')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

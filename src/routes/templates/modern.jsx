@@ -199,8 +199,9 @@ export function ModernPrint() {
   useEffect(() => {
     download();
     setTimeout(() => {
-        navigate("/templates/modern");
-    }, 3000)
+      navigate("/templates/modern");
+    }, 3000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -277,7 +278,12 @@ export function ModernPrint() {
           })}
         </div>
         <div className='p-4'>
-          <p className='font-poppins font-light leading-tight mb-8' style={{'wordSpacing': '0.1rem'}}>{summary.summary}</p>
+          <p
+            className='font-poppins font-light leading-tight mb-8'
+            style={{ wordSpacing: "0.1rem" }}
+          >
+            {summary.summary}
+          </p>
           <h2 className='leading-[0] h-10 pt-[6px] border-t-[1px] border-b-[1px] border-t-gray-400 border-b-gray-400 text-2xl font-bold text-darkBlue'>
             Experience
           </h2>
