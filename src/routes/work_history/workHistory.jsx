@@ -14,7 +14,6 @@ import {
 } from "react-router-dom";
 import { db } from "../../firebaseConfig";
 import EmptyDoc from "../../components/emptyDoc";
-import {MdDelete} from 'react-icons/md';
 
 export async function loader({ params }) {
   const auth = getAuth();

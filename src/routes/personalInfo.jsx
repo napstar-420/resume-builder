@@ -5,7 +5,6 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { Link, useLoaderData, Form, redirect, useNavigation } from "react-router-dom";
 import {RxDoubleArrowRight} from 'react-icons/rx';
-import {MdDelete} from 'react-icons/md';
 
 export async function loader() {
   const auth = getAuth();
