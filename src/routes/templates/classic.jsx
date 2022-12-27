@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import { formatDate } from "../../App";
 import jsPDF from "jspdf";
 import { useRef } from "react";
-import html2canvas from "html2canvas";
 import { useEffect } from "react";
 import {BsPencilFill, BsDownload} from 'react-icons/bs'
 
 export default function Classic() {
-
+  const pdfRef = useRef(null)
   const userDoc = useOutletContext();
   const { personalInfo, workHistory, education, skills, summary, extras } =
     userDoc;
@@ -21,6 +20,7 @@ export default function Classic() {
     <div className='bg-gray-300 p-2 min-h-[calc(100vh-7rem)] grid place-items-center sm:grid-cols-[1fr_auto_auto_1fr]'>
       <div></div>
       <main
+      ref={pdfRef}
         id='classic'
         className='bg-white w-full xs:w-[450px] origin-top-left py-2 px-4'
       >
@@ -133,12 +133,14 @@ export function ClassicPrint() {
   window.title = 'DOWNLOADING PDF'
   
   async function download() {
-    var doc = new jsPDF();
+    var doc = new jsPDF('p', 'px', [1122.519685, 793.7007874]);
     const content = pdfRef.current;
-    const contentCanvas = await html2canvas(content);
-    const image = contentCanvas.toDataURL("image/png");
-    doc.addImage(image, "png", 0, 0);
-    doc.save('resume.pdf');
+    doc.html(content, {
+      callback: (doc) => {
+        doc.deletePage(2)
+        doc.save('resume.pdf');
+      }
+    })
     setTimeout(() => {
       window.close()
     }, 3000)
@@ -146,13 +148,13 @@ export function ClassicPrint() {
 
   useEffect(() => {
     download();
-  })
+  }, [])
 
   return (
   <main
         ref={pdfRef}
         id='classic-print'
-        className='mx-auto bg-white w-[210mm] h-[297mm] origin-top-left p-4'
+        className='mx-auto bg-white w-[793.7007874px] h-[1122.519685px] p-4'
       >
         <h1 className='uppercase text-5xl font-medium text-center font-railway tracking-widest mt-8'>
           {personalInfo.fname} {personalInfo.sname}

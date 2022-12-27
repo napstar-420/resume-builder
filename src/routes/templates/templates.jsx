@@ -189,26 +189,10 @@ export default function Templates() {
           <span />
           Classic
         </NavLink>
-        <div className='template_link'>
+        <NavLink to={'modern'} className='template_link'>
           <span className='!bg-blue-500' />
           Modern
-        </div>
-        <div className='template_link'>
-          <span className='!bg-yellow-500' />
-          Stylish
-        </div>
-        <div className='template_link'>
-          <span className='!bg-green-500' />
-          Raptor
-        </div>
-        <div className='template_link'>
-          <span className='!bg-red-500' />
-          Special
-        </div>
-        <div className='template_link'>
-          <span className='!bg-purple-500' />
-          Enfold
-        </div>
+        </NavLink>
       </nav>
     </div>
   );

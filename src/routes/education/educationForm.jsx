@@ -244,7 +244,7 @@ export default function EducationForm() {
       )}
       <div className='sm:col-start-1 sm:col-end-3'>
         <label className='formLabel' htmlFor='eduExp'>
-          Work Experience
+          Education Experience
         </label>
         <textarea
           name='eduExp'

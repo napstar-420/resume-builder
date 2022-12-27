@@ -28,6 +28,7 @@ import Root from "./routes/root";
 import Templates, {loader as templateLoader} from './routes/templates/templates.jsx';
 import TemplatesRoot from './routes/templates/templatesRoot.jsx';
 import Classic, {ClassicPrint} from "./routes/templates/classic";
+import Modern, { ModernPrint } from "./routes/templates/modern";
 
 export function formatDate(str) {
   const months = [
@@ -80,8 +81,10 @@ function App() {
         <Route path="templates" element={<Templates />} loader={templateLoader}>
           <Route index element={<TemplatesRoot />}/>
           <Route path="classic" element={<Classic />}/>
+          <Route path="modern" element={<Modern />}/>
           <Route path="download">
             <Route path="classic" element={<ClassicPrint />} />
+            <Route path="modern" element={<ModernPrint />}/>
           </Route>
         </Route>
       </Route>
