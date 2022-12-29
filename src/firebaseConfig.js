@@ -7,7 +7,7 @@ import {getFirestore} from 'firebase/firestore';
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCBY8rLq0U7FBKpuZiOTAsqIvZKiPe40PY",
-  authDomain: "resume-builder-97.firebaseapp.com",
+  authDomain: "free-online-resume-builder.netlify.app",
   projectId: "resume-builder-97",
   storageBucket: "resume-builder-97.appspot.com",
   messagingSenderId: "816529590570",
