@@ -23,9 +23,9 @@ export default function Header({ showNav, setShowNav, authState, logOutUser }) {
         <Link to={"/"} className='mx-4 hover:underline'>
           Privacy Policy
         </Link>
-        <Link to={"/"} className='mx-4 hover:underline'>
-          About Us
-        </Link>
+        <a href="mailto:dev.zohaib.work@gmail.com" className='mx-4 hover:underline'>
+          Contact me
+        </a>
         <Link to={"/templates"} className='mx-4 hover:underline '>
           Templates
         </Link>
