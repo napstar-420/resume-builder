@@ -28,6 +28,7 @@ export async function action({request}) {
 
 export default function Summary() {
   const dataSnap = useLoaderData();
+  const [title, setTitle] = useState(dataSnap.title);
   const [summary, setSummary] = useState(dataSnap.summary);
   const navigation = useNavigation();
   
@@ -53,6 +54,12 @@ export default function Summary() {
             your technical and soft skills will be most important and relevant.
           </p>
           <Form method="post" className='edit_info_form'>
+            <div className="sm:col-start-1 sm:col-end-3">
+            <label htmlFor='title' className='formLabel'>
+                Title
+              </label>
+              <input type="text" name="title" id="title" className="form_control" value={title} placeholder="Sales Manager" onChange={(e) => setTitle(e.target.value)}/>
+            </div>
             <div className="sm:col-start-1 sm:col-end-3">
               <label htmlFor='summary' className='formLabel'>
                 Briefly tell us about your background
