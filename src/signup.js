@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import {app, db} from './firebaseConfig';
 
@@ -19,19 +19,6 @@ export async function createUser(email, password, name) {
         return 'error';
       }
     })
-}
-
-export function signUpWithGoogle() {
-  const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-  const result = signInWithPopup(auth, provider)
-  .then((userCredentials) => {
-    return {uid:userCredentials.user.uid, email: userCredentials.user.email, name: userCredentials.user.displayName} ;
-  })
-  .catch((error) => {
-    return null;
-  })
-  return result;
 }
 
 export async function createUserDoc(uid, name, email, password = '') {

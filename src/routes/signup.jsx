@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, Form, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import {AiOutlineLoading3Quarters} from 'react-icons/ai';
-import { createUser, signUpWithGoogle, createUserDoc } from "../signup";
+import { createUser, createUserDoc } from "../signup";
 import {IoMdArrowBack} from 'react-icons/io'
 
 export default function Signup() {
@@ -34,15 +33,6 @@ export default function Signup() {
       }
     }
   }
-
-  const handleGoogleSignUp = async () => {
-    const result = await signUpWithGoogle();
-    if (result) {
-      setAccountCreated("in-process");
-      await createUserDoc(result.uid, result.name, result.email, '');
-      navigate("/edit");
-    }
-  };
 
   return (
     <div
@@ -220,21 +210,10 @@ export default function Signup() {
         >
           Have an account? sign-in.
         </Link>
-        <div className='flex w-full items-center my-2'>
-          <div className='flex-1 h-1 bg-gray-300 rounded'></div>
-          <div className='mx-2'>or</div>
-          <div className='flex-1 h-1 bg-gray-300 rounded'></div>
-        </div>
-        <button
-          onClick={handleGoogleSignUp}
-          className='px-16 py-2 border-2 border-gray-600 hover:bg-gray-600 rounded text-lg font-semibold text-gray-600 hover:text-white transition-all flex items-center justify-center mb-4'
-        >
-          Sign up with Google <FcGoogle className='ml-2 text-xl' />
-        </button>
         <Link to='/' className="absolute left-0 top-0 m-4 border-2 border-mainYellow text-mainYellow hover:bg-mainYellow hover:text-white rounded-full p-1 text-xl transition-all">
           <IoMdArrowBack />
         </Link>
-        <p className='text-xs text-gray-400 '>
+        <p className='text-xs text-gray-400 mt-4 text-center'>
           Design and developed by Zohaib Khan
         </p>
       </div>
